@@ -127,7 +127,8 @@
     .hero-badge .dot{width:7px;height:7px;border-radius:50%;background:var(--teal);box-shadow:0 0 12px var(--teal);animation:pulse 1.8s infinite}
     @keyframes pulse{0%,100%{opacity:1}50%{opacity:.35}}
     .hero-badge b{color:var(--gold);font-weight:700}
-    .hero-title{font-size:clamp(36px,8.2vw,80px);font-weight:900;line-height:1.08;letter-spacing:-.03em}
+    .hero-title{font-size:clamp(33px,7.6vw,80px);font-weight:900;line-height:1.08;letter-spacing:-.03em;overflow-wrap:anywhere}
+    .br-desktop{display:none}
     .hero-title .grad{background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-fill-color:transparent;background-size:200% 200%;animation:gradShift 6s ease-in-out infinite}
     @keyframes gradShift{0%,100%{background-position:0% 50%}50%{background-position:100% 50%}}
     .hero-sub{margin:22px auto 0;max-width:660px;color:var(--text-sub);font-size:clamp(15px,2.4vw,19px)}
@@ -136,6 +137,31 @@
     .type::after{content:"";display:inline-block;width:2px;height:1em;background:var(--teal);margin-left:2px;vertical-align:-.12em;animation:blink 1s steps(1,end) infinite}
     @keyframes blink{0%,100%{opacity:1}50%{opacity:0}}
     .hero-actions{display:flex;flex-wrap:wrap;gap:14px;justify-content:center;margin-top:34px}
+
+    /* =========================================================
+       一键复制联系方式卡
+    ========================================================= */
+    .contact-strip{width:100%;max-width:760px;margin:34px auto 0;display:grid;grid-template-columns:1fr;gap:14px}
+    .copy-card{position:relative;display:flex;align-items:center;gap:16px;text-align:left;padding:18px 20px;border-radius:18px;background:var(--surface);border:1px solid var(--border);cursor:pointer;transition:transform .3s var(--ease),border-color .3s,background .3s,box-shadow .3s;overflow:hidden}
+    .copy-card::before{content:"";position:absolute;inset:0;background:linear-gradient(120deg,var(--c1),var(--c2));opacity:.12;transition:opacity .3s}
+    .copy-card:hover{transform:translateY(-3px);border-color:var(--border-strong);background:var(--surface-2);box-shadow:var(--shadow)}
+    .copy-card:hover::before{opacity:.22}
+    .copy-card .cc-label{position:relative;display:block;font-size:12px;letter-spacing:.08em;color:var(--text-dim);font-weight:700;text-transform:uppercase}
+    .copy-card .cc-value{position:relative;display:block;font-size:clamp(17px,2.6vw,24px);font-weight:900;letter-spacing:-.01em;background:linear-gradient(100deg,var(--c1),var(--c2));-webkit-background-clip:text;background-clip:text;color:transparent;word-break:break-word;overflow-wrap:anywhere}
+    .copy-card .cc-value.cc-long{font-size:clamp(15px,2.1vw,20px);letter-spacing:-.02em}
+    .copy-card .cc-hint{position:relative;display:block;font-size:12px;color:var(--text-sub);margin-top:4px}
+    .copy-main{position:relative;flex:1;min-width:0}
+    .copy-right{margin-left:auto;position:relative;flex:none}
+    .copy-btn{width:46px;height:46px;border-radius:14px;background:linear-gradient(135deg,var(--c1),var(--c2));display:grid;place-items:center;color:#fff;box-shadow:0 8px 22px rgba(0,0,0,.32);transition:transform .25s}
+    .copy-card:hover .copy-btn{transform:scale(1.1)}
+    .copy-btn svg{width:21px;height:21px}
+    .copy-ico{width:40px;height:40px;border-radius:12px;background:linear-gradient(135deg,var(--c1),var(--c2));display:grid;place-items:center;color:#fff;flex:none;box-shadow:0 8px 22px rgba(0,0,0,.3)}
+    .copy-ico svg{width:20px;height:20px}
+    .contact-mini{position:relative;display:inline-flex;align-items:center;gap:8px;margin-top:18px;color:var(--text-sub);font-size:13.5px;font-weight:500;transition:color .25s}
+    .contact-mini:hover{color:var(--text)}
+    .contact-mini i{font-style:normal;display:inline-block;transition:transform .25s}
+    .contact-mini:hover i{transform:translateX(3px)}
+
     .hero-meta{display:flex;flex-wrap:wrap;gap:12px 26px;justify-content:center;margin-top:44px;padding-top:26px;border-top:1px solid var(--border)}
     .hero-meta div{text-align:center;min-width:96px}
     .hero-meta b{display:block;font-size:clamp(20px,3.2vw,28px);font-weight:800}
@@ -243,6 +269,14 @@
     .sticky-cta .btn{width:100%;box-shadow:0 14px 40px rgba(255,138,61,.5)}
 
     /* =========================================================
+       复制成功 Toast
+    ========================================================= */
+    .copy-toast{position:fixed;left:50%;top:24px;z-index:200;transform:translateX(-50%) translateY(-16px);display:flex;align-items:center;gap:9px;padding:12px 20px;border-radius:100px;background:rgba(14,14,24,.96);border:1px solid var(--border-strong);box-shadow:0 18px 44px rgba(0,0,0,.5);font-size:14.5px;font-weight:700;color:var(--text);opacity:0;pointer-events:none;transition:opacity .28s var(--ease),transform .28s var(--ease)}
+    .copy-toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+    .copy-toast .tk{width:26px;height:26px;border-radius:50%;background:linear-gradient(135deg,var(--green),var(--teal));display:grid;place-items:center;color:#fff;flex:none}
+    .copy-toast .tk svg{width:14px;height:14px}
+
+    /* =========================================================
        滚动显现动效
     ========================================================= */
     .reveal{opacity:0;transform:translateY(28px);transition:opacity .75s var(--ease),transform .75s var(--ease)}
@@ -257,6 +291,8 @@
       .stats-grid{grid-template-columns:repeat(4,1fr)}
       .chip-grid{grid-template-columns:repeat(2,1fr)}
       .split{grid-template-columns:repeat(2,1fr)}
+      .contact-strip{grid-template-columns:1fr 1fr}
+      .br-desktop{display:initial}
     }
     @media(min-width:1024px){
       section{padding:96px 0}
@@ -334,14 +370,43 @@
     <section class="hero">
       <div class="wrap">
         <div class="hero-badge"><span class="dot"></span><b>市面独有的我们独家唯一</b>&nbsp;· 市面有的我们都有</div>
-        <h1 class="hero-title">一手厂商 · 高价收量<br><span class="grad">高转化 · 每日结算</span></h1>
+        <h1 class="hero-title">一手厂商 · 高价收量，<br class="br-desktop"><span class="grad">高转化 · 每日结算</span></h1>
         <p class="hero-sub">
           自研 <b>原生安卓 / iOS 双端 + 超强 H5</b>，10M 超小包体，快速对接长期合作。面向 <span class="type" id="typeText"></span> 全面开放，真实流量全收，假量勿扰。
         </p>
-        <div class="hero-actions">
-          <a href="#contact" class="btn btn-primary">开启合作 <i>→</i></a>
-          <a href="#channels" class="btn btn-ghost">了解渠道 <i>↓</i></a>
+        <div class="contact-strip">
+          <div class="copy-card t-blue" data-copy="@Au3322" role="button" tabindex="0" aria-label="复制 Telegram 账号 @Au3322">
+            <span class="copy-ico" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 2 11 13"/><path d="M22 2 15 22l-4-9-9-4z"/></svg>
+            </span>
+            <span class="copy-main">
+              <span class="cc-label">Telegram · 点这里复制</span>
+              <span class="cc-value">@Au3322</span>
+              <span class="cc-hint">复制后到 Telegram 搜索添加</span>
+            </span>
+            <span class="copy-right">
+              <span class="copy-btn" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+              </span>
+            </span>
+          </div>
+          <div class="copy-card t-magenta" data-copy="kali884886@gmail.com" role="button" tabindex="0" aria-label="复制邮箱 kali884886@gmail.com">
+            <span class="copy-ico" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 6-10 7L2 6"/></svg>
+            </span>
+            <span class="copy-main">
+              <span class="cc-label">邮箱 · 点这里复制</span>
+              <span class="cc-value cc-long">kali884886@gmail.com</span>
+              <span class="cc-hint">复制后到邮箱客户端写信</span>
+            </span>
+            <span class="copy-right">
+              <span class="copy-btn" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+              </span>
+            </span>
+          </div>
         </div>
+        <a href="#channels" class="contact-mini">了解推广渠道 <i>→</i></a>
         <div class="hero-meta">
           <div><b class="g">95%<span style="font-size:.55em">起</span></b><span>高分成</span></div>
           <div><b class="g">每日</b><span>实时结算</span></div>
@@ -522,7 +587,7 @@
 
   <!-- 移动端底部转化 CTA -->
   <div class="sticky-cta" id="stickyCta">
-    <a href="#contact" class="btn btn-primary">立即对接 · 每日结算</a>
+    <button class="btn btn-primary" data-copy="@Au3322" type="button">一键复制 Telegram @Au3322</button>
   </div>
 
   <script>
@@ -565,6 +630,55 @@
       else { del = false; wi = (wi + 1) % words.length; setTimeout(type, 350); }
     }
     type();
+
+    // 一键复制联系方式
+    const toast = document.createElement('div');
+    toast.className = 'copy-toast';
+    toast.innerHTML = '<span class="tk"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span><span class="tt">已复制到剪贴板</span>';
+    document.body.appendChild(toast);
+    let toastTimer = null;
+    function flashToast(msg){
+      const tt = toast.querySelector('.tt');
+      if(msg) tt.textContent = msg;
+      toast.classList.add('show');
+      clearTimeout(toastTimer);
+      toastTimer = setTimeout(() => toast.classList.remove('show'), 1800);
+    }
+    function copyText(text){
+      if(navigator.clipboard && navigator.clipboard.writeText){
+        navigator.clipboard.writeText(text).then(() => flashToast('已复制「' + text + '」')).catch(() => legacyCopy(text));
+      } else {
+        legacyCopy(text);
+      }
+    }
+    function legacyCopy(text){
+      const ta = document.createElement('textarea');
+      ta.value = text;
+      ta.style.position = 'fixed';
+      ta.style.opacity = '0';
+      document.body.appendChild(ta);
+      ta.select();
+      try { document.execCommand('copy'); flashToast('已复制「' + text + '」'); }
+      catch(e) { flashToast('复制失败，请手动复制 ' + text); }
+      document.body.removeChild(ta);
+    }
+    document.addEventListener('click', (e) => {
+      const card = e.target.closest('.copy-card');
+      if(card){
+        copyText(card.dataset.copy);
+        return;
+      }
+      const btn = e.target.closest('[data-copy].btn');
+      if(btn){
+        copyText(btn.dataset.copy);
+        e.preventDefault();
+      }
+    });
+    document.querySelectorAll('.copy-card').forEach(card => {
+      card.addEventListener('keydown', (e) => {
+        if(e.key === 'Enter' || e.key === ' '){ e.preventDefault(); copyText(card.dataset.copy); }
+      });
+    });
 
     // 滚动显现
     const revealEls = document.querySelectorAll('.reveal, .stagger');
